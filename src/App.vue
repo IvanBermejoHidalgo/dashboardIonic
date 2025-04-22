@@ -1,11 +1,13 @@
 <template>
   <ion-app>
     <ion-split-pane content-id="main-content">
-      <ion-menu content-id="main-content" type="overlay">
+      <ion-menu content-id="main-content" type="overlay" class="custom-menu-width">
         <ion-content>
           <ion-list id="inbox-list">
-            <ion-list-header>Inbox</ion-list-header>
-            <ion-note>hi@ionicframework.com</ion-note>
+            <div class="logo-container">
+              <img src="/src/assets/logo.png" alt="Motorsport News Logo" class="menu-logo">
+            </div>
+            <ion-note>Motorsport News</ion-note>
 
             <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :key="i">
               <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
@@ -13,15 +15,6 @@
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
-          </ion-list>
-
-          <ion-list id="labels-list">
-            <ion-list-header>Labels</ion-list-header>
-
-            <ion-item v-for="(label, index) in labels" lines="none" :key="index">
-              <ion-icon aria-hidden="true" slot="start" :ios="bookmarkOutline" :md="bookmarkSharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
           </ion-list>
         </ion-content>
       </ion-menu>
@@ -66,7 +59,7 @@ import {
 const selectedIndex = ref(0);
 const appPages = [
   {
-    title: 'Inbox',
+    title: 'Negocio',
     url: '/folder/Inbox',
     iosIcon: mailOutline,
     mdIcon: mailSharp,
@@ -102,7 +95,6 @@ const appPages = [
     mdIcon: warningSharp,
   },
 ];
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
 const path = window.location.pathname.split('folder/')[1];
 if (path !== undefined) {
@@ -111,6 +103,60 @@ if (path !== undefined) {
 </script>
 
 <style scoped>
+
+.dark-theme {
+  --background: var(--ion-color-dark);
+  --ion-text-color: var(--ion-color-primary-contrast);
+}
+
+.dark-theme ion-content {
+  --background: var(--ion-color-dark);
+}
+
+.dark-theme ion-item {
+  --background: var(--ion-color-dark-shade);
+  --color: var(--ion-color-primary-contrast);
+}
+
+.dark-theme ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.2);
+  --color: var(--ion-color-primary);
+}
+
+.dark-theme ion-note {
+  color: var(--ion-color-medium);
+}
+
+/* Estilos para el logo */
+.logo-container {
+  padding: 10px 0 1px 16px; /* Alineado con el padding de los items */
+  margin-left: -8px; /* Compensa el padding del ion-content */
+}
+
+.menu-logo {
+  height: 130px; /* Tamaño ajustado */
+  width: auto;
+  max-width: 180px; /* Máximo ancho permitido */
+}
+
+/* Estilo para el texto debajo del logo */
+.app-note {
+  display: block;
+  padding-left: 16px; /* Mismo alineamiento que el logo */
+  margin-left: -8px; /* Compensa el padding del ion-content */
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  padding-bottom: 15px;
+}
+
+/* Ajustes del menú */
+.custom-menu-width {
+  --width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+/* Mantén todos tus otros estilos existentes */
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
@@ -120,6 +166,20 @@ ion-menu.md ion-content {
   --padding-end: 8px;
   --padding-top: 20px;
   --padding-bottom: 20px;
+}
+
+/* Corrección específica para iOS */
+ion-menu.ios .logo-container,
+ion-menu.ios .app-note {
+  padding-left: 16px;
+  margin-left: 0;
+}
+
+/* Corrección para Material Design */
+ion-menu.md .logo-container,
+ion-menu.md .app-note {
+  padding-left: 10px;
+  margin-left: -2px;
 }
 
 ion-menu.md ion-list {
@@ -141,7 +201,7 @@ ion-menu.md ion-list#inbox-list {
 
 ion-menu.md ion-list#inbox-list ion-list-header {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 50;
 
   min-height: 20px;
 }

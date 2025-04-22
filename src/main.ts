@@ -20,23 +20,22 @@ import '@ionic/vue/css/text-transformation.css';
 import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import '@ionic/vue/css/palettes/dark.always.css'; */
-/* @import '@ionic/vue/css/palettes/dark.class.css'; */
+/* Dark Mode */
 import '@ionic/vue/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
 
+// Importaciones adicionales para gráficos
+import 'apexcharts/dist/apexcharts.css'; // CSS para ApexCharts
+import * as echarts from 'echarts';      // ECharts
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+
+// Configuración global de ECharts
+app.config.globalProperties.$echarts = echarts;
 
 router.isReady().then(() => {
   app.mount('#app');
