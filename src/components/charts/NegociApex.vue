@@ -1,7 +1,7 @@
 <template>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>📰 Noticias por Sesión</ion-card-title>
+        <ion-card-title style="color: white">📰 Noticias por Sesión</ion-card-title>
       </ion-card-header>
       <ion-card-content style="height: 300px; padding: 0;">
         <div ref="chart" style="height: 100%; width: 100%;"></div>

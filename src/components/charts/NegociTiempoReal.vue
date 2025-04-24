@@ -1,7 +1,7 @@
 <template>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>🗓️ Uso de Calendario</ion-card-title>
+        <ion-card-title style="color: white">🗓️ Uso de Calendario</ion-card-title>
       </ion-card-header>
       <ion-card-content style="position: relative; height: 300px; padding: 16px;">
         <canvas 

@@ -1,7 +1,7 @@
 <template>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>🏁 Categorías Preferidas</ion-card-title>
+        <ion-card-title style="color: white">🏁 Categorías Preferidas</ion-card-title>
       </ion-card-header>
       <ion-card-content style="height: 400px; padding: 0; position: relative;">
         <div ref="chart" style="width: 100%; height: 100%; min-height: 300px;"></div>
