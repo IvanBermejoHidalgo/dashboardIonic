@@ -1,5 +1,5 @@
 <template>
-    <ion-card>
+    <ion-card class="card-dashboard">
       <ion-card-header>
         <ion-card-title style="color: white">🗓️ Uso de Calendario</ion-card-title>
       </ion-card-header>
@@ -84,3 +84,14 @@
     chartInstance?.destroy();
   });
   </script>
+
+<style scoped>
+/* estilos.css o App.vue <style> */
+.card-dashboard {
+  background: rgba(20, 20, 20, 0.8);
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+</style>

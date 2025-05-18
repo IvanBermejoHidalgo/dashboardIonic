@@ -53,13 +53,13 @@ import {
   IonButtons,
   IonMenuButton
 } from '@ionic/vue';
-import NegociChart from '@/components/charts/NegociChart.vue';
-import NegociApex from '@/components/charts/NegociApex.vue';
-import NegociEcharts from '@/components/charts/NegociEcharts.vue';
-import NegociCustom from '@/components/charts/NegociCustom.vue';
-import NegociTiempoReal from '@/components/charts/NegociTiempoReal.vue';
+import TecnicoChart from '@/components/charts/TecnicoChart.vue';
+import TecnicoApex from '@/components/charts/TecnicoApex.vue';
+import TecnicoEcharts from '@/components/charts/TecnicoEcharts.vue';
+import TecnicoCustom from '@/components/charts/TecnicoCustom.vue';
+import TecnicoTiempoReal from '@/components/charts/TecnicoTiempoReal.vue';
 
-const businessCharts = [NegociChart, NegociApex, NegociEcharts, NegociCustom, NegociTiempoReal];
+const businessCharts = [TecnicoChart, TecnicoApex, TecnicoEcharts, TecnicoCustom, TecnicoTiempoReal];
 </script>
 
 <style scoped>

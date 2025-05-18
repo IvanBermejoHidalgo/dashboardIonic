@@ -8,7 +8,19 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/folder/:id',
-    component: () => import ('../views/Dashboard.vue')
+    component: () => import ('../views/DashboardTecnico.vue')
+  },
+  {
+    path: '/folder/tecnico',
+    component: () => import('../views/DashboardTecnico.vue') // Nueva vista para "Técnico"
+  },
+  {
+    path: '/folder/negocio',
+    component: () => import('../views/DashboardNegocio.vue') // Nueva vista para "Negocio"
+  },
+  {
+    path: '/folder/KPITecnico',
+    component: () => import('../views/DashboardKPITecnico.vue') // Nueva vista para "Negocio"
   }
 ]
 
@@ -17,4 +29,4 @@ const router = createRouter({
   routes
 })
 
-export default router
+export default router;

@@ -59,20 +59,20 @@ import {
 const selectedIndex = ref(0);
 const appPages = [
   {
-    title: 'Negocio',
-    url: '/folder/Inbox',
+    title: 'Técnico',
+    url: '/folder/tecnico',
     iosIcon: mailOutline,
     mdIcon: mailSharp,
   },
   {
-    title: 'Outbox',
-    url: '/folder/Outbox',
+    title: 'Negocio',
+    url: '/folder/negocio',
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp,
   },
   {
-    title: 'Favorites',
-    url: '/folder/Favorites',
+    title: 'KPI Técnico',
+    url: '/folder/KPITecnico',
     iosIcon: heartOutline,
     mdIcon: heartSharp,
   },
@@ -290,4 +290,12 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+.card-dashboard {
+  background: rgba(20, 20, 20, 0.8);
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
 </style>

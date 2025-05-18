@@ -1,7 +1,7 @@
 <template>
-  <ion-card>
+  <ion-card class="card-dashboard">
     <ion-card-header>
-      <ion-card-title style="color: white">⏱️ Tiempo de Sesión</ion-card-title>
+      <ion-card-title style="color: white">⏱️ Tiempo medio de sesión por usuario</ion-card-title>
     </ion-card-header>
     <ion-card-content style="position: relative; height: 300px;">
       <canvas 
@@ -20,6 +20,8 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/vue';
 import Chart from 'chart.js/auto';
+import ChartAnnotation from 'chartjs-plugin-annotation';
+Chart.register(ChartAnnotation);
 
 const chart = ref<HTMLCanvasElement>();
 let chartInstance: Chart | null = null;
@@ -85,11 +87,11 @@ const createChart = () => {
           },
           tooltip: {
             backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            titleFont: { size: 14, color: 'white' },
-            bodyFont: { size: 14, color: 'white' },
+            titleFont: { size: 14, weight: 'bold' }, // Evita `color` aquí
+            bodyFont: { size: 14, weight: 'bold' },  // Evita `color` aquí
             padding: 12,
-            titleColor: 'white',
-            bodyColor: 'white'
+            titleColor: 'white', // Aquí usamos titleColor y bodyColor
+            bodyColor: 'white'   // Asegúrate de usar `bodyColor` también
           },
           annotation: {
             annotations: {
@@ -102,8 +104,8 @@ const createChart = () => {
                 borderDash: [5, 5],
                 label: {
                   content: 'KPI: 10 min',
-                  enabled: true,
-                  position: 'right',
+                  display: true,
+                  position: 'end',
                   backgroundColor: 'rgba(0,0,0,0.7)',
                   color: 'white'
                 }
@@ -190,4 +192,13 @@ onMounted(() => {
   border-color: #00FF00;
   background-color: rgba(0, 255, 0, 0.1);
 }
+
+/* estilos.css o App.vue <style> */
+.card-dashboard {
+  background: rgba(20, 20, 20, 0.8);
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
 </style>
