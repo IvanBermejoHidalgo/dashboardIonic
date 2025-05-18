@@ -91,9 +91,9 @@ const cards = [
 <style scoped>
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  justify-content: center; /* para centrar si hay card sola */
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* tarjetas más grandes */
+  gap: 8px; /* menos espacio entre tarjetas */
+  justify-content: center;
 }
 
 .static-card {
@@ -103,12 +103,15 @@ const cards = [
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: none;
   box-shadow: none;
-  min-width: 400px;
-  max-width: 480px;
+  min-width: 400px;  /* más ancha */
+  max-width: 480px;  /* más ancha */
   margin: 0 auto;
+  font-size: 1.1rem; /* texto un poco más grande */
+  padding: 16px;     /* un poco más de padding para que respire */
 }
 
 .static-card ion-card-title {
   color: #ffffff;
+  font-size: 1.3rem; /* título un poco más grande */
 }
 </style>

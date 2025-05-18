@@ -21,6 +21,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/folder/KPITecnico',
     component: () => import('../views/DashboardKPITecnico.vue') // Nueva vista para "Negocio"
+  },
+  {
+    path: '/folder/KPINegocio',
+    component: () => import('../views/DashboardKPINegocio.vue') // Nueva vista para "Negocio"
   }
 ]
 

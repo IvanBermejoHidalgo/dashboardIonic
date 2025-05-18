@@ -77,6 +77,12 @@ const appPages = [
     mdIcon: heartSharp,
   },
   {
+    title: 'KPI Negocio',
+    url: '/folder/KPINegocio',
+    iosIcon: heartOutline,
+    mdIcon: heartSharp,
+  },
+  {
     title: 'Archived',
     url: '/folder/Archived',
     iosIcon: archiveOutline,
