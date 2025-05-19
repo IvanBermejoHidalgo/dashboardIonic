@@ -1,7 +1,7 @@
 <template>
   <ion-card>
     <ion-card-header>
-      <ion-card-title style="color: white">🧠 Uso de Memoria en Tiempo Real</ion-card-title>
+      <ion-card-title style="color: white">📲 Porcentaje de participación de los usuarios</ion-card-title>
     </ion-card-header>
     <ion-card-content style="position: relative; height: 300px;">
       <div class="donut-container">
@@ -34,7 +34,7 @@
             x="100"
             y="115"
             text-anchor="middle"
-            font-size="40"
+            font-size="32"
             fill="white"
             font-weight="bold"
             font-family="Arial, sans-serif"
@@ -55,14 +55,13 @@ const max = 100;
 const radius = 80;
 const circumference = 2 * Math.PI * radius;
 
-// Color dinámico: verde < 50, amarillo 50-80, rojo > 80
+// Colores según nivel de participación
 const color = computed(() => {
-  if (value.value < 50) return '#4caf50';       // verde
-  else if (value.value < 80) return '#ffeb3b';  // amarillo
-  else return '#f44336';                         // rojo
+  if (value.value < 30) return '#f44336';      // rojo: bajo engagement
+  else if (value.value < 70) return '#ffeb3b'; // amarillo: medio
+  else return '#4caf50';                        // verde: alto
 });
 
-// Calcula offset para el stroke-dashoffset
 const dashOffset = computed(() => {
   return circumference * (1 - value.value / max);
 });
@@ -70,13 +69,15 @@ const dashOffset = computed(() => {
 let intervalId: number | undefined;
 
 const updateValue = () => {
-  // Simula nuevo valor aleatorio entre 20 y 100
-  value.value = Math.floor(20 + Math.random() * 80);
+  // Simula valores: notificaciones recibidas y las que tuvieron interacción
+  const total = 1000; // simulamos que 1000 usuarios recibieron notificaciones
+  const interacted = Math.floor(100 + Math.random() * 700); // entre 100 y 800 interacciones
+  value.value = Math.round((interacted / total) * 100);
 };
 
 onMounted(() => {
   updateValue();
-  intervalId = window.setInterval(updateValue, 1000);
+  intervalId = window.setInterval(updateValue, 2000);
 });
 
 onUnmounted(() => {

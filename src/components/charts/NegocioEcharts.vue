@@ -185,4 +185,7 @@ onMounted(() => {
   background-color: rgba(255, 0, 0, 0.1);
   color: #FF5555;
 }
+ion-card-title {
+  color: white;
+}
 </style>
