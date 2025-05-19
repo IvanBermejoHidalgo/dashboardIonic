@@ -24,7 +24,6 @@
           <text x="100" y="75" text-anchor="middle" font-size="24" fill="white" font-weight="bold">
             6⭐
           </text>
-
         </svg>
       </div>
 
@@ -37,16 +36,13 @@
 </template>
 
 <script setup lang="ts">
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-
 
 const data = [55, 62, 58, 60, 63, 61]; // Simulación de CPU
 const average = computed(() => data.reduce((a, b) => a + b, 0) / data.length);
 const kpiTarget = 50;
 const isKpiAchieved = computed(() => average.value <= kpiTarget);
 
-// Gauge principal
 const gaugePath = computed(() => {
   const clamped = Math.min((average.value / 100) * 180, 180);
   const radians = (clamped * Math.PI) / 180;
@@ -55,7 +51,6 @@ const gaugePath = computed(() => {
   return `M 20 100 A 80 80 0 0 1 ${x} ${y}`;
 });
 
-// Línea del KPI
 const kpiMarkerPath = computed(() => {
   const angle = Math.min((kpiTarget / 100) * 180, 180);
   const radians = (angle * Math.PI) / 180;

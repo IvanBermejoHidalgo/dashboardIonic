@@ -1,12 +1,12 @@
 <template>
   <ion-card class="card-dashboard">
     <ion-card-header>
-      <ion-card-title style="color: white">💰 Ingresos por publicidad mensuales</ion-card-title>
+      <ion-card-title style="color: white">📈 Ventas mensuales (en miles)</ion-card-title>
     </ion-card-header>
     <ion-card-content style="height: 300px; padding: 0; position: relative;">
       <div ref="chart" style="height: 100%; width: 100%;"></div>
       <div class="kpi-badge" :class="{ 'kpi-achieved': isKpiAchieved }">
-        KPI: 2000€ {{ isKpiAchieved ? '✅' : '🟡' }}
+        KPI: {{ kpiTarget }} {{ isKpiAchieved ? '✅' : '🟡' }}
       </div>
     </ion-card-content>
   </ion-card>
@@ -14,18 +14,18 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/vue';
 import ApexCharts from 'apexcharts';
 
 const chart = ref<HTMLElement>();
 let apexChart: ApexCharts | null = null;
 
-const revenueData = [1500, 1800, 2200, 2100, 2500, 1700]; // Ingresos mensuales
-const kpiTarget = 2000;
+// Datos de ejemplo: ventas mensuales en miles
+const salesData = [10, 15, 12, 18, 20, 25];
+const kpiTarget = 18;
 
-// Comprueba si se ha alcanzado el KPI en al menos un mes
+// Comprueba si algún dato cumple o supera el KPI
 const isKpiAchieved = computed(() => {
-  return revenueData.some(value => value >= kpiTarget);
+  return salesData.some(value => value >= kpiTarget);
 });
 
 onMounted(() => {
@@ -34,44 +34,31 @@ onMounted(() => {
 
     apexChart = new ApexCharts(chart.value, {
       series: [{
-        name: 'Ingresos (€)',
-        data: revenueData
+        name: 'Ventas',
+        data: salesData
       }],
       chart: {
         type: 'bar',
         height: '100%',
+        width: '100%',
         animations: { enabled: true },
         toolbar: { show: false },
         parentHeightOffset: 0,
-        events: {
-          mounted: (chartContext: any) => {
-            const series = chartContext?.w?.globals?.series[0] as number[];
-            series?.forEach(value => {
-              if (value >= kpiTarget) {
-                chartContext.updateOptions({
-                  fill: {
-                    colors: ({ value }) => value >= kpiTarget ? '#00FF00' : '#FF0000'
-                  }
-                }, false, false, false);
-              }
-            });
-          }
-        }
       },
       plotOptions: {
         bar: {
           borderRadius: 4,
-          columnWidth: '65%',
+          columnWidth: '60%',
           colors: {
             ranges: [{
               from: kpiTarget,
-              to: Math.max(...revenueData, kpiTarget),
-              color: '#00FF00'
+              to: Math.max(...salesData, kpiTarget),
+              color: '#00FF00'  // Verde si cumple KPI
             }]
           }
         }
       },
-      colors: ['#FF0000'], // Color base rojo
+      colors: ['#FF4500'],  // Rojo para ventas bajo KPI
       grid: {
         borderColor: 'rgba(255, 255, 255, 0.1)',
         yaxis: { lines: { show: true } }
@@ -83,32 +70,27 @@ onMounted(() => {
           strokeDashArray: 5,
           label: {
             borderColor: '#FFFF00',
-            style: {
-              color: '#fff',
-              background: 'rgba(0, 0, 0, 0.7)'
-            },
-            text: 'KPI: 2000€'
+            style: { color: '#fff', background: 'rgba(0,0,0,0.7)' },
+            text: `KPI: ${kpiTarget}`
           }
         }]
       },
       xaxis: {
         categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-        labels: {
-          style: { colors: 'white' }
-        }
+        labels: { style: { colors: 'white' } }
       },
       yaxis: {
         min: 0,
-        max: Math.max(...revenueData, kpiTarget) + 500,
+        max: Math.max(...salesData, kpiTarget) + 5,
         labels: {
           style: { colors: 'white' },
-          formatter: val => val === kpiTarget ? `KPI: ${val}€` : `${val}€`
+          formatter: (val: number) => val === kpiTarget ? `KPI: ${val}` : `${val}`
         }
       },
       tooltip: {
         theme: 'dark',
         y: {
-          formatter: val => `${val >= kpiTarget ? '✅' : '⚠️'} ${val}€ (KPI: ${kpiTarget}€)`
+          formatter: (val: number) => val >= kpiTarget ? `✅ ${val}k` : `⚠️ ${val}k`
         }
       }
     });
@@ -125,13 +107,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.card-dashboard {
-  background: rgba(20, 20, 20, 0.8);
-  color: white;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-}
-
 .kpi-badge {
   position: absolute;
   top: 15px;
@@ -149,5 +124,12 @@ onUnmounted(() => {
 .kpi-achieved {
   border-color: #00FF00;
   background: rgba(0, 255, 0, 0.1);
+}
+
+.card-dashboard {
+  background: rgba(20, 20, 20, 0.8);
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
 </style>

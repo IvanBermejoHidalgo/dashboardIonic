@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/vue';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-
+import { nextTick } from 'vue';
 
 const data = [55, 62, 58, 60, 63, 61]; // Simulación de CPU
 const average = computed(() => data.reduce((a, b) => a + b, 0) / data.length);
@@ -76,13 +76,21 @@ const updateSize = () => {
   }
 };
 
+let resizeObserver: ResizeObserver | null = null;
+
 onMounted(() => {
-  updateSize();
-  window.addEventListener('resize', updateSize);
+  const container = document.querySelector('.gauge-container');
+  if (container) {
+    resizeObserver = new ResizeObserver(() => updateSize());
+    resizeObserver.observe(container);
+    updateSize(); // primer cálculo
+  }
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateSize);
+  if (resizeObserver) {
+    resizeObserver.disconnect();
+  }
 });
 </script>
 
@@ -90,6 +98,7 @@ onUnmounted(() => {
 .gauge-container {
   width: 100%;
   height: 100%;
+  min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;

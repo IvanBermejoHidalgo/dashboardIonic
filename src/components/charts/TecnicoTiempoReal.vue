@@ -25,7 +25,7 @@ import Chart from 'chart.js/auto';
 
 const chartCanvas = ref<HTMLCanvasElement | null>(null);
 let chartInstance: Chart | null = null;
-let updateInterval: number;
+let updateInterval: ReturnType<typeof setInterval>;
 
 const labels = ['Noticias', 'Encuestas', 'Calendario', 'Editar perfil'];
 
@@ -73,9 +73,7 @@ onMounted(() => {
             ticks: {
               backdropColor: 'transparent',
               color: '#ccc',
-              stepSize: 1,
-              beginAtZero: true,
-              max: 7
+              stepSize: 1
             }
           }
         },

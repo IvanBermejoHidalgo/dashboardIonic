@@ -33,108 +33,92 @@ onMounted(() => {
     chart.value.style.minHeight = '300px';
     
     apexChart = new ApexCharts(chart.value, {
-      series: [{ 
-        name: 'Noticias', 
-        data: newsData 
-      }],
-      chart: { 
-        type: 'bar',
-        height: '100%',
-        width: '100%',
-        animations: { enabled: true },
-        toolbar: { show: false },
-        parentHeightOffset: 0,
-        events: {
-          mounted: function(chartContext: any, _config: any) {
-            const series = chartContext?.w?.globals?.series[0] as number[];
-
-            series?.forEach((value: number, index: number) => {
-              if (value >= kpiTarget) {
-                chartContext.updateOptions({
-                  fill: {
-                    colors: function(params: { value: number; seriesIndex: number; w: any }) {
-                      return params.value >= kpiTarget ? '#00FF00' : '#FF0000';
-                    }
-                  }
-                }, false, false, false);
-              }
-            });
-          }
-        }
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 4,
-          columnWidth: '70%',
-          colors: {
-            ranges: [{
-              from: kpiTarget,
-              to: Math.max(...newsData, kpiTarget),
-              color: '#00FF00'
-            }]
-          }
-        }
-      },
-      colors: ['#FF0000'], // Color base rojo
-      grid: {
-        borderColor: 'rgba(255, 255, 255, 0.1)',
-        yaxis: {
-          lines: {
-            show: true
-          }
-        }
-      },
-      markers: {
-        size: 0
-      },
-      annotations: {
-        yaxis: [{
-          y: kpiTarget,
-          borderColor: '#FFFF00',
-          strokeDashArray: 5,
-          label: {
-            borderColor: '#FFFF00',
-            style: {
-              color: '#fff',
-              background: 'rgba(0, 0, 0, 0.7)'
-            },
-            text: 'KPI: 4'
-          }
+  series: [{
+    name: 'Noticias',
+    data: newsData
+  }],
+  chart: {
+    type: 'bar',
+    height: '100%',
+    width: '100%',
+    animations: { enabled: true },
+    toolbar: { show: false },
+    parentHeightOffset: 0,
+  },
+  plotOptions: {
+    bar: {
+      borderRadius: 4,
+      columnWidth: '70%',
+      colors: {
+        ranges: [{
+          from: kpiTarget,
+          to: Math.max(...newsData, kpiTarget),
+          color: '#00FF00'  // Verde para >= KPI
         }]
-      },
-      xaxis: {
-        categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-        labels: {
-          style: {
-            colors: 'white'
-          }
-        }
-      },
-      yaxis: {
-        min: 0,
-        max: Math.max(...newsData, kpiTarget) + 2,
-        labels: {
-          style: {
-            colors: 'white'
-          },
-          formatter: function(value: number) {
-            if (value === kpiTarget) {
-              return 'KPI: ' + value;
-            }
-            return value;
-          }
-        }
-      },
-      tooltip: {
-        theme: 'dark',
-        y: {
-          formatter: function(value: number) {
-            const kpiStatus = value >= kpiTarget ? '✅' : '⚠️';
-            return `${kpiStatus} ${value} (KPI: ${kpiTarget})`;
-          }
-        }
       }
-    });
+    }
+  },
+  colors: ['#FF0000'],  // Rojo para lo que no cumple
+  grid: {
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    yaxis: {
+      lines: {
+        show: true
+      }
+    }
+  },
+  markers: {
+    size: 0
+  },
+  annotations: {
+    yaxis: [{
+      y: kpiTarget,
+      borderColor: '#FFFF00',
+      strokeDashArray: 5,
+      label: {
+        borderColor: '#FFFF00',
+        style: {
+          color: '#fff',
+          background: 'rgba(0, 0, 0, 0.7)'
+        },
+        text: 'KPI: 4'
+      }
+    }]
+  },
+  xaxis: {
+    categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+    labels: {
+      style: {
+        colors: 'white'
+      }
+    }
+  },
+  yaxis: {
+    min: 0,
+    max: Math.max(...newsData, kpiTarget) + 2,
+    labels: {
+      style: {
+        colors: 'white'
+      },
+      formatter: function(value: number) {
+        if (value === kpiTarget) {
+          return 'KPI: ' + value;
+        }
+        return value;
+      }
+    }
+  },
+  tooltip: {
+    theme: 'dark',
+    y: {
+      formatter: function(value: number) {
+        const kpiStatus = value >= kpiTarget ? '✅' : '⚠️';
+        return `${kpiStatus} ${value} (KPI: ${kpiTarget})`;
+      }
+    }
+  }
+});
+
     
     setTimeout(() => {
       apexChart?.render();

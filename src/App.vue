@@ -70,36 +70,36 @@ const appPages = [
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp,
   },
-  {
-    title: 'KPI Técnico',
-    url: '/folder/KPITecnico',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
-  },
-  {
-    title: 'KPI Negocio',
-    url: '/folder/KPINegocio',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
-  },
-  {
-    title: 'Archived',
-    url: '/folder/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp,
-  },
-  {
-    title: 'Trash',
-    url: '/folder/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp,
-  },
-  {
-    title: 'Spam',
-    url: '/folder/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp,
-  },
+  // {
+  //   title: 'KPI Técnico',
+  //   url: '/folder/KPITecnico',
+  //   iosIcon: heartOutline,
+  //   mdIcon: heartSharp,
+  // },
+  // {
+  //   title: 'KPI Negocio',
+  //   url: '/folder/KPINegocio',
+  //   iosIcon: heartOutline,
+  //   mdIcon: heartSharp,
+  // },
+  // {
+  //   title: 'Archived',
+  //   url: '/folder/Archived',
+  //   iosIcon: archiveOutline,
+  //   mdIcon: archiveSharp,
+  // },
+  // {
+  //   title: 'Trash',
+  //   url: '/folder/Trash',
+  //   iosIcon: trashOutline,
+  //   mdIcon: trashSharp,
+  // },
+  // {
+  //   title: 'Spam',
+  //   url: '/folder/Spam',
+  //   iosIcon: warningOutline,
+  //   mdIcon: warningSharp,
+  // },
 ];
 
 const path = window.location.pathname.split('folder/')[1];

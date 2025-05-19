@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, nextTick} from 'vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/vue';
 import * as echarts from 'echarts';
 
@@ -93,8 +93,10 @@ const initChart = () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick();
   initChart();
+
   const resizeObserver = new ResizeObserver(() => {
     myChart?.resize();
   });
@@ -108,6 +110,7 @@ onMounted(() => {
     myChart?.dispose();
   });
 });
+
 </script>
 
 <style scoped>
