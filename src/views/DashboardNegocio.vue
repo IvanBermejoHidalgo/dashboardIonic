@@ -13,25 +13,14 @@
       <ion-grid>
         <!-- Sección Negocio -->
         <ion-row>
-          <!-- <ion-col size="12">
-            <ion-text>
-              <h2 style="color: white">Dashboard Técnico</h2>
-            </ion-text>
-          </ion-col> -->
-          
-          <!-- Primera fila: 2 diagramas -->
-          <ion-col size="12" size-md="6" v-for="(chart, index) in businessCharts.slice(0, 2)" :key="'b1-'+index">
-            <component :is="chart"/>
+          <!-- Primera fila: 2 gráficos -->
+          <ion-col size="12" size-md="6" v-for="(chart, index) in businessCharts.slice(0, 2)" :key="'fila1-' + index">
+            <component :is="chart" />
           </ion-col>
-          
-          <!-- Segunda fila: 2 diagramas -->
-          <ion-col size="12" size-md="6" v-for="(chart, index) in businessCharts.slice(2, 4)" :key="'b2-'+index">
-            <component :is="chart"/>
-          </ion-col>
-          
-          <!-- Tercera fila: 1 diagrama (centrado) -->
-          <ion-col size="12" size-md="6" offset-md="3" v-if="businessCharts.length > 4">
-            <component :is="businessCharts[4]"/>
+
+          <!-- Segunda fila: 3 gráficos -->
+          <ion-col size="12" size-md="4" v-for="(chart, index) in businessCharts.slice(2, 5)" :key="'fila2-' + index">
+            <component :is="chart" />
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -63,7 +52,6 @@ const businessCharts = [NegocioChart, NegocioApex, NegocioEcharts, NegocioCustom
 </script>
 
 <style scoped>
-/* Estilos generales */
 ion-col {
   margin-bottom: 16px;
   display: flex;
@@ -76,7 +64,7 @@ ion-card {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 250px; /* Altura reducida */
+  min-height: 250px;
 }
 
 ion-card-header {
@@ -100,13 +88,11 @@ h2 {
   padding-left: 10px;
 }
 
-/* Estilo para el botón de menú en móvil */
 ion-menu-button {
   --color: white;
   display: block;
 }
 
-/* Responsividad adicional */
 @media (max-width: 768px) {
   ion-col {
     padding: 8px;
@@ -114,7 +100,7 @@ ion-menu-button {
   
   ion-card {
     margin: 8px 0;
-    min-height: 220px; /* Más compacto en móvil */
+    min-height: 220px;
   }
 }
 
@@ -122,7 +108,11 @@ ion-menu-button {
   ion-col[size-md="6"] {
     padding: 12px;
   }
-  
+
+  ion-col[size-md="4"] {
+    padding: 12px;
+  }
+
   ion-menu-button {
     display: none;
   }

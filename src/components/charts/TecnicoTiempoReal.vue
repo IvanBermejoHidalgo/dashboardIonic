@@ -67,7 +67,7 @@ onMounted(() => {
             pointLabels: {
               color: 'white',
               font: {
-                size: 13
+                size: 16
               }
             },
             ticks: {
@@ -157,6 +157,8 @@ onUnmounted(() => {
 }
 .kpis h3 {
   margin-bottom: 8px;
-  font-size: 15px;
+  font-size: 18px; /* antes estaba 15px, subido a 18px */
+  font-weight: 600; /* opcional, para que se vea más destacado */
 }
+
 </style>
